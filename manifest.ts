@@ -19,5 +19,5 @@ export default Manifest({
    * чтобы выполнять API-вызовы к нему из пользовательской функции.
    */
   outgoingDomains: ["api.github.com"],
-  botScopes: ["commands", "chat:write", "chat:write.public"],
+  botScopes: ["commands", "chat:write", "chat:write.public", "datastore:read", "datastore:write"],
 });
