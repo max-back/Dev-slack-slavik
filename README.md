@@ -247,6 +247,7 @@ script hooks that are executed by the CLI and implemented by the SDK.
 [Functions](https://api.slack.com/automation/functions) are reusable building
 blocks of automation that accept inputs, perform calculations, and provide
 outputs. Functions can be used independently or as steps in workflows.
+-Я так понимаю, основная бизнес-логика хранится здесь
 
 ### `/workflows`
 
@@ -256,12 +257,14 @@ are executed in order. Each step in a Workflow is a function.
 Workflows can be configured to run without user input or they can collect input
 by beginning with a [form](https://api.slack.com/automation/forms) before
 continuing to the next step.
+-Кажется тут лежат представления
 
 ### `/triggers`
 
 [Triggers](https://api.slack.com/automation/triggers) determine when workflows
 are executed. A trigger file describes a scenario in which a workflow should be
 run, such as a user pressing a button or when a specific event occurs.
+-Ну и сами ивент-хендлеры
 
 ## Resources
 

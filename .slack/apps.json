@@ -1,0 +1,10 @@
+{
+  "apps": {
+    "T07614KPZ55": {
+      "app_id": "A07THKL56KT",
+      "team_domain": "performance-lab",
+      "team_id": "T07614KPZ55"
+    }
+  },
+  "default": "performance-lab"
+}
