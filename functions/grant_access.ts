@@ -49,7 +49,7 @@ export default SlackFunction(
 
 		if (!token.ok) throw new Error("Failed to access auth token");
 
-		if 
+		// if 
 
 		const headers = {
 			Accept: "application/vnd.github+json",
@@ -77,12 +77,6 @@ export default SlackFunction(
 				method: "PUT",
 				headers,
 			});
-
-			// console.error(`${new Date().toISOString()} - ${hostname}`);
-			// console.error(`${new Date().toISOString()} - ${apiURL}`);
-			// console.error(`${new Date().toISOString()} - ${collaboratorEndpoint}`);
-			// console.error(`${new Date().toISOString()} - ${response.json()}`);
-			// console.error(`${new Date().toISOString()} - ${headers}`);
 
 			if (response.status === 204) {
 				return {
