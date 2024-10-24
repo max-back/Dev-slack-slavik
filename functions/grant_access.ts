@@ -49,6 +49,8 @@ export default SlackFunction(
 
 		if (!token.ok) throw new Error("Failed to access auth token");
 
+		if 
+
 		const headers = {
 			Accept: "application/vnd.github+json",
 			Authorization: `Bearer ${token.external_token}`,
@@ -76,6 +78,12 @@ export default SlackFunction(
 				headers,
 			});
 
+			// console.error(`${new Date().toISOString()} - ${hostname}`);
+			// console.error(`${new Date().toISOString()} - ${apiURL}`);
+			// console.error(`${new Date().toISOString()} - ${collaboratorEndpoint}`);
+			// console.error(`${new Date().toISOString()} - ${response.json()}`);
+			// console.error(`${new Date().toISOString()} - ${headers}`);
+
 			if (response.status === 204) {
 				return {
 					outputs: {
@@ -87,8 +95,7 @@ export default SlackFunction(
 				throw new Error(`${response.status}: ${response.statusText}`);
 			}
 		} catch (err) {
-			const errorLog = `${new Date().toISOString()} - ${err.message}\n`;
-			await Deno.writeTextFile("error.log", errorLog, { append: true });
+			console.error(`${new Date().toISOString()} - ${err.message}`);
 			return {
 				error:
 					`An error was encountered while adding the contributor: \`${err.message}\``,
