@@ -23,6 +23,7 @@ Slack using functions and workflows.
 ## Supported Workflows
 
 - **Create new issue**: Create and assign new issues in repositories.
+- **Add collaborator**: Assign GitHub user to repository as collaborator.
 
 ## Setup
 
@@ -241,6 +242,14 @@ configuration. This file defines attributes like app name and description.
 
 Used by the CLI to interact with the project's SDK dependencies. It contains
 script hooks that are executed by the CLI and implemented by the SDK.
+
+### `/assets`
+
+Used for storing static assets like images, CSS, and JavaScript files.
+This directory currently stores the users-examples.json file, which is used to
+control who is allowed to contribute to a particular Github repository.
+
+To use it, create a `users.json` file and fill in the details similar to the example.
 
 ### `/functions`
 
