@@ -1,5 +1,10 @@
 import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
 
+// Определяем интерфейс для структуры JSON
+interface UserMap {
+	[key: string]: string; // Ключ - строка, значение - строка
+}
+
 export const GrantAccessDefinition = DefineFunction({
 	callback_id: "grant_access",
 	title: "Grant access to Github repository",
@@ -49,16 +54,33 @@ export default SlackFunction(
 
 		if (!token.ok) throw new Error("Failed to access auth token");
 
-		// if 
+		const { githubAccessTokenId, url, username } = inputs;
+
+		let _githubUsername = '';
+
+		try {
+			const data = await Deno.readTextFile("./assets/users.json"); // Убедитесь, что путь правильный
+			const userData: UserMap = JSON.parse(data); // Преобразуем текст в JSON с указанием типа
+			
+			if ((username in userData)) {
+				_githubUsername = userData[username];
+			} 
+			else {
+				throw new Error(`User ${username} not found.`);
+			}
+		} catch (err) {
+			return {
+				error:
+					`Error reading/parsing file or user missing: \`${err.message}\``,
+			};
+		}
 
 		const headers = {
 			Accept: "application/vnd.github+json",
 			Authorization: `Bearer ${token.external_token}`,
 			"Content-Type": "application/json",
-			"X-GitHub-Api-Version": "2022-11-28",	
+			"X-GitHub-Api-Version": "2022-11-28",
 		};
-
-		const { githubAccessTokenId, url, username } = inputs;
 
 		try {
 			const { hostname, pathname } = new URL(url);
@@ -71,14 +93,16 @@ export default SlackFunction(
 
 			// https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2022-11-28#add-a-repository-collaborator
 			const collaboratorEndpoint =
-				`https://${apiURL}/repos/${owner}/${repo}/collaborators/${username}`;
+				`https://${apiURL}/repos/${owner}/${repo}/collaborators/${_githubUsername}`;
 
 			const response = await fetch(collaboratorEndpoint, {
 				method: "PUT",
 				headers,
 			});
 
-			if (response.status === 204) {
+			console.log(collaboratorEndpoint);
+
+			if (response.status === 201) {
 				return {
 					outputs: {
 						message:

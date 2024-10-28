@@ -257,7 +257,7 @@ are executed in order. Each step in a Workflow is a function.
 Workflows can be configured to run without user input or they can collect input
 by beginning with a [form](https://api.slack.com/automation/forms) before
 continuing to the next step.
--Кажется тут лежат представления
+-Кажется тут лежат представления и их поведение
 
 ### `/triggers`
 
